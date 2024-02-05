@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * execute - Executes Monty bytecode instructions.
  * @stack: Pointer to the head of the stack.
@@ -10,10 +9,22 @@
  */
 void execute(stack_t **stack, unsigned int counter)
 {
-    stack_t *h;
-    int len = 0, aux;
+    stack_t *h, *temp;
+    int len = 0, result;
 
     h = *stack;
+    
+    /* Check if stack is empty */
+    if (h == NULL)
+    {
+        fprintf(stderr, "L%d: stack is empty\n", counter);
+        fclose(bus.file);
+        free(bus.content);
+        free_stack(*stack);
+        exit(EXIT_FAILURE);
+    }
+
+    /* Check if stack has at least 2 elements */
     while (h)
     {
         h = h->next;
@@ -29,6 +40,7 @@ void execute(stack_t **stack, unsigned int counter)
         exit(EXIT_FAILURE);
     }
 
+    /* Check for division by zero */
     h = *stack;
     if (h->n == 0)
     {
@@ -39,9 +51,11 @@ void execute(stack_t **stack, unsigned int counter)
         exit(EXIT_FAILURE);
     }
 
-    aux = h->next->n / h->n;
-    h->next->n = aux;
-    *stack = h->next;
+    /* Perform division and update stack */
+    temp = h->next;
+    result = temp->n / h->n;
+    temp->n = result;
+    *stack = temp;
     free(h);
 }
 

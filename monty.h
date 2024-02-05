@@ -53,10 +53,9 @@ void jan_mod(stack_t **head, unsigned int counter);
 void jan_pchar(stack_t **head, unsigned int counter);
 void jan_pstr(stack_t **head, unsigned int counter);
 void jan_stack(stack_t **head, unsigned int counter);
-void execute(stack_t **stack, unsigned int counter);
 void jan_rotl(stack_t **head);
 void jan_rotr(stack_t **head);
 void jan_queue(stack_t **head, int n);
-
+void execute(stack_t **stack, unsigned int counter);
 #endif
 
